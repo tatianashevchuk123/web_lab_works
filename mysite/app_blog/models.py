@@ -10,9 +10,14 @@ from django.db import models
 from django.urls import reverse
 
 
+from django.urls import reverse
+
 class Category(models.Model):
-    category = models.CharField(u'Категорія',
-                                max_length=250, help_text=u'Максимум 250 символів')
+    category = models.CharField(
+        verbose_name=u'Категорія',
+        max_length=250,
+        help_text=u'Максимум 250 сим.'
+    )
     slug = models.SlugField(u'Слаг')
     objects = models.Manager()
 
@@ -23,6 +28,13 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
+    def get_absolute_url(self):
+        try:
+            url = reverse('articles-category-list',
+                          kwargs={'slug': self.slug})
+        except:
+            url = "/"
+        return url
 
 class Article(models.Model):
     pub_date = models.DateTimeField()
