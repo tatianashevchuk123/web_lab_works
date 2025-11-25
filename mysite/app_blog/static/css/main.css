@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+
+body {
+background-image: url('../img/fon.jpg');
+background-repeat: repeat-y;
+}
+
+
+div > h1 {
+color: #fff;
+font-family: 'Ubuntu', sans-serif;
+}
+
+
+.navbar a h4 {
+color: #fff;
+margin-right: 15px;
+}
+
+
+.article-block {
+background: #fff;
+color: #383838;
+font-family: 'Ubuntu', sans-serif;
+box-shadow: 2px 2px 1px #ccc;
+padding: 10px;
+margin: 10px;
+}
+
+
+.container-image img {
+width: 100%;
+}
+
+
+body > div > div > ol > li {
+margin: 0 5px;
+}
+
