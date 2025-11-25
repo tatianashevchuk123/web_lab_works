@@ -2,28 +2,30 @@
 {% load static %}
 {% block content %}
 
-{% if categories %}
-<nav class="navbar navbar-default">
-  <div class="container">
-    {% for item in categories %}
-    <a href="{{ item.get_absolute_url }}">
-        <h4>{{ item.category }}</h4>
-    </a>
+<div class="categories-menu">
+    {% for c in categories %}
+        <a href="{{ c.get_absolute_url }}" class="category-link">{{ c.category }}</a>
     {% endfor %}
-  </div>
-</nav>
-{% endif %}
-
-{% for item in articles %}
-<div class="article-block">
-    <a href="{{ item.get_absolute_url }}">
-        <h3>{{ item.title }}</h3>
-    </a>
-    <h5>{{ item.pub_date|date:"j E Y" }}</h5>
-    <p>{{ item.description|striptags|truncatewords_html:32 }}</p>
 </div>
-{% endfor %}
 
-<a href="{% url 'articles-list' %}"><h4>Всі публікації</h4></a>
+<div class="articles-list">
+    {% for item in articles %}
+        <div class="article-card">
+            <a href="{{ item.get_absolute_url }}" class="article-title-link">
+                <h3 class="article-card-title">{{ item.title }}</h3>
+            </a>
+
+            <p class="article-card-date">
+                {{ item.pub_date|date:"d E Y" }}
+            </p>
+
+            <p class="article-card-text">
+                {{ item.description|striptags|truncatewords:25 }}
+            </p>
+        </div>
+    {% endfor %}
+</div>
+
+<a href="{% url 'articles-list' %}" class="all-posts-link">Всі публікації</a>
 
 {% endblock %}

@@ -1,30 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
 {% spaceless %}
 
+<!-- БІЛИЙ БЛОК ДЛЯ СТАТТІ -->
 <div class="article-detail">
 
-    <ol class="breadcrumb">
-        <li><a href="/">Головна</a></li>
-        <li><a href="{% url 'articles-list' %}">Публікації</a></li>
-        <li><a href="{{ item.category.get_absolute_url }}">{{ item.category|upper }}</a></li>
-        <li>{{ item.title|upper }}</li>
-    </ol>
+   <ol class="breadcrumb">
+    <li><a href="/">Головна</a></li>
+    <li><a href="{% url 'articles-list' %}">Публікації</a></li>
+    <li><a href="{{ item.category.get_absolute_url }}">{{ item.category|upper }}</a></li>
+    <li>{{ item.title|upper }}</li>
+</ol>
 
-    <h3>{{ item.title }}</h3>
-    <h5>{{ item.pub_date|date:"d E Y" }}</h5>
-
-    <div>
-        {{ item.description|safe }}
-
-        {% if item.images.all %}
-            <img src="{{ item.images.all.0.image.url }}" alt="">
-        {% endif %}
+    <!-- Заголовок -->
+    <h2 class="article-title">{{ item.title }}</h2>
+    <div class="article-date">
+        {{ item.pub_date|date:"d E Y" }}
     </div>
+
+    <!-- Текст статті -->
+    <div class="article-text">
+        {{ item.description|safe }}
+    </div>
+
+    <!-- Фото-карусель -->
+    {% if images %}
+        {% include "fotorama.html" with images=images %}
+    {% endif %}
 
 </div>
 
 {% endspaceless %}
 {% endblock %}
-
